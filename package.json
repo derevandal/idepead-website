@@ -1,0 +1,36 @@
+{
+  "name": "idepead-website",
+  "version": "0.0.1",
+  "description": "IDEPead's website",
+  "author": "André Van Dal <andre@lenyeg.com.br>",
+  "private": true,
+  "dependencies": {
+    "@nuxtjs/pwa": "2.0.6",
+    "buefy": "^0.6.3",
+    "bulmaswatch": "^0.6.2",
+    "nuxt": "1.4.0",
+    "nuxt-bulma-slim": "^0.3.2",
+    "nuxt-material-design-icons": "^1.0.4",
+    "pug": "^2.0.1",
+    "pug-loader": "^2.3.0",
+    "replace-in-file": "^3.2.0"
+  },
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "replace": "./node_modules/replace-in-file/bin/cli.js 'useConfigFile: false,' ' ' ./node_modules/nuxt/lib/builder/webpack/postcss.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-html": "^2.0.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1"
+  }
+}
