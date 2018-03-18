@@ -1,0 +1,20 @@
+@import "../../node_modules/bulmaswatch/cosmo/variables";
+
+@import "../../node_modules/bulma/sass/utilities/initial-variables";
+@import "../../node_modules/bulma/sass/utilities/functions";
+
+$idepead: #6BC7D2;
+$idepead-invert: findColorInvert($idepead);
+
+@import "../../node_modules/bulma/sass/utilities/derived-variables";
+$addColors: (
+  "idepead":($idepead, $idepead-invert)
+);
+$colors: map-merge($colors, $addColors);
+
+$icomoon-font-path: "/fonts" !default;
+
+$fa-commenting: \e900;
+$fa-user: \e901;
+$fa-envelope: \e902;
+$fa-mobile: \e958;
