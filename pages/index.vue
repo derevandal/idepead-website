@@ -104,7 +104,7 @@ export default {
     }
   },
   methods: {
-    validateBeforeSubmit() {
+    validateBeforeSubmit () {
       this.loading = true
       this.$validator.validateAll().then((result) => {
         if (result) {
@@ -117,18 +117,23 @@ export default {
           let body = encode({
             'form-name': 'fale-conosco', ...this.form
           })
-          function handleErrors(response) {
-              if (!response.ok) {
-                  throw Error(response.statusText)
-              }
-              return response;
-          }
+          // function handleErrors (response) {
+          //     if (!response.ok) {
+          //         throw Error(response.statusText)
+          //     }
+          //     return response;
+          // }
           fetch('/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: body
           })
-          .then(handleErrors)
+          .then((response) => {
+            if (!response.ok) {
+              throw Error(response.statusText)
+            }
+            return response
+          })
           .then(() => {
             this.sended = true
             this.form = {
@@ -149,9 +154,9 @@ export default {
             this.error = true
           })
           this.loading = false
-          return;
+          return
         }
-      });
+      })
     }
   }
 }
