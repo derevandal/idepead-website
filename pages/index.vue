@@ -6,22 +6,27 @@ section.hero.is-idepead.is-bold.is-fullheight
         h1.title
           img(src="/logotipo-blue.svg" width="600" alt="IDEPead")
         .box
-          .title.has-text-black Fale conosco 🤩
+          .title.has-text-black Fale conosco&nbsp;
+            emoji(emoji=":star-struck:" set="google" :size="32")
           article.notification.is-danger(v-if="error")
             .media
               .media-left
                 span.icon.is-large
                   i.fa.fa-exclamation-circle.fa-3x
               .media-content
-                | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
+                | Eita, aconteceu algum problema!&nbsp;
+                emoji(emoji=":dizzy_face:" set="google" :size="16")
+                | &nbsp;Procure-nos no&nbsp;
                 a(href="https://fb.com/idepead") Facebook
-                | &nbsp;enquanto isso 😅
+                | &nbsp;enquanto isso.&nbsp;
+                emoji(emoji=":sweat_smile:" set="google" :size="16"))
           article.notification.is-success(v-if="sended")
             .media
               .media-left
                 span.icon.is-large
                   i.fa.fa-check-circle.fa-3x
-              .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
+              .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você.
+                emoji(emoji=":hugging_face:" set="google" :size="16")
           form(name="fale-conosco", netlify, action="/send", method='POST', netlify-honeypot='subject', @submit.prevent="validateBeforeSubmit", novalidate="novalidate")
             .field(style="display:none;")
               .control
@@ -63,6 +68,9 @@ section.hero.is-idepead.is-bold.is-fullheight
 </template>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
 html, body {
   overflow: auto;
 }
@@ -78,10 +86,15 @@ html, body {
 </style>
 
 <script>
-import {mask} from 'vue-the-mask'
+import { mask } from 'vue-the-mask'
+import { Emoji } from 'emoji-mart-vue'
+
 export default {
   head: {
     title: 'Fale conosco - IDEPead'
+  },
+  components: {
+    emoji: Emoji
   },
   name: 'indexIDEPead',
   directives: {mask},

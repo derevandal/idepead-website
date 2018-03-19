@@ -8,6 +8,7 @@
     "@nuxtjs/pwa": "2.0.6",
     "buefy": "^0.6.3",
     "bulmaswatch": "^0.6.2",
+    "emoji-mart-vue": "^2.4.5",
     "nuxt": "1.4.0",
     "nuxt-bulma-slim": "^0.3.2",
     "nuxt-material-design-icons": "^1.0.4",
