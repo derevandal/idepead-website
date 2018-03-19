@@ -58,7 +58,7 @@ section.hero.is-idepead.is-bold.is-fullheight
                     i.fa.fa-github
                   span André Van Dal
               p.control
-                button.button.is-primary(type="submit" form="fale-conosco" :class="{'is-loading': loading }")
+                button.button.is-primary(type="submit" :class="{'is-loading': loading }")
                   | Enviar mensagem
 
 
