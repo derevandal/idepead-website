@@ -48,9 +48,6 @@ section.hero.is-idepead.is-bold.is-fullheight
               .control.has-icons-left(:class="{'is-loading': loading }")
                 textarea.textarea(:class="{ 'is-danger': errors.has('message') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
                 span.help.is-danger(v-if="errors.has('message')") Em que podemos lhe ajudar?
-            .field
-              p.control.is-expanded
-                div(netlify-recaptcha)
             .field.is-grouped.is-grouped-right
               p.control.is-expanded
                 a.button.is-text(href="https://github.com/derevandal/idepead-website" target="_blank" style="text-decoration: none")
