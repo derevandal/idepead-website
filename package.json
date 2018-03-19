@@ -13,7 +13,9 @@
     "nuxt-material-design-icons": "^1.0.4",
     "pug": "^2.0.1",
     "pug-loader": "^2.3.0",
-    "replace-in-file": "^3.2.0"
+    "replace-in-file": "^3.2.0",
+    "vee-validate": "^2.0.6",
+    "vue-the-mask": "^0.11.1"
   },
   "scripts": {
     "dev": "nuxt",
