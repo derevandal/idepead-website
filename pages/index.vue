@@ -7,9 +7,9 @@
             img(src="/logotipo-blue.svg" width="600" alt="IDEPead" :class="['network',online ? 'online' : 'offline']")
           .box
             .title.has-text-black Fale conosco 🤩
-            b-notification(type='is-success' v-if="sended" has-icon)
+            b-notification(type='is-success' v-show="sended" has-icon)
               | Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
-            b-notification(type='is-danger' v-if="error" has-icon)
+            b-notification(type='is-danger' v-show="error" has-icon)
               | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
               a(href="https://fb.com/idepead") Facebook
               | &nbsp;enquanto isso 😅
