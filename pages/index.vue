@@ -44,12 +44,6 @@
                   span.help.is-danger(v-if="errors.has('email')") Informe seu e-mail.
               .field
                 .control.has-icons-left(:class="{'is-loading': loading }")
-                  input.input(type="text" :class="{ 'is-danger': errors.has('subject') }" name="subject" v-model="form.subject" placeholder="Qual o assunto?"  v-validate="'required'")
-                  span.icon.is-left
-                    i.fa.fa-commenting
-                  span.help.is-danger(v-if="errors.has('subject')") Informe o assunto do contato.
-              .field
-                .control.has-icons-left(:class="{'is-loading': loading }")
                   textarea.textarea(:class="{ 'is-danger': errors.has('message') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
                   span.help.is-danger(v-if="errors.has('message')") Em que podemos lhe ajudar?
               .field
@@ -101,7 +95,6 @@ export default {
         name: '',
         phone: '',
         email: '',
-        subject: '',
         message: ''
       }
     }
@@ -151,7 +144,6 @@ export default {
               name: '',
               phone: '',
               email: '',
-              subject: '',
               message: ''
             }
             this.$validator.pause()
