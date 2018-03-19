@@ -40,8 +40,8 @@
                   span.help.is-danger(v-if="errors.has('subject')") Informe o assunto do contato.
               .field
                 .control.has-icons-left(:class="{'is-loading': loading }")
-                  textarea.textarea(:class="{ 'is-danger': errors.has('subject') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
-                  span.help.is-danger(v-if="errors.has('subject')") Em que podemos lhe ajudar?
+                  textarea.textarea(:class="{ 'is-danger': errors.has('message') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
+                  span.help.is-danger(v-if="errors.has('message')") Em que podemos lhe ajudar?
               .field
                 p.control.is-expanded
                   div(netlify-recaptcha style="display:none")
@@ -88,6 +88,10 @@ export default {
       sended: false,
       error: false,
       form: {
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
         message: ''
       }
     }
@@ -106,6 +110,7 @@ export default {
       this.online = type === 'online'
     },
     validateBeforeSubmit() {
+      console.log(this.$validator)
       this.$validator.validateAll().then((result) => {
         if (result) {
           console.log(result)
@@ -132,17 +137,23 @@ export default {
           .then(handleErrors)
           .then(() => {
             this.sended = true
+            this.form = {
+              name: '',
+              phone: '',
+              email: '',
+              subject: '',
+              message: ''
+            }
+            this.$validator.pause()
+            this.$nextTick(() => {
+              this.$validator.errors.clear()
+              this.$validator.fields.items.forEach(field => field.reset())
+              this.$validator.fields.items.forEach(field => this.errors.remove(field))
+              this.$validator.resume()
+            })
           })
           .catch(() => {
             this.error = true
-          })
-          this.form = {}
-          this.$validator.pause()
-          this.$nextTick(() => {
-            this.$validator.errors.clear()
-            this.$validator.fields.items.forEach(field => field.reset())
-            this.$validator.fields.items.forEach(field => this.errors.remove(field))
-            this.$validator.resume()
           })
           this.loading = false
           return;
