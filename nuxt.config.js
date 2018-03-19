@@ -46,7 +46,6 @@ module.exports = {
   ],
 
   plugins: [
-    '~plugins/buefy',
     '~plugins/v-validate'
   ]
 }
