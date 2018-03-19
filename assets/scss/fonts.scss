@@ -1,23 +1,20 @@
 $icomoon-font-path: "/fonts" !default;
 
-$fa-copyright: \e905;
 $fa-github: \e904;
 $fa-exclamation-circle: \e903;
 $fa-check-circle: \e906;
-$fa-commenting: \e900;
 $fa-user: \e901;
 $fa-envelope: \e902;
 $fa-mobile: \e958;
-$fa-warning: \ea07;
 
 
 @font-face {
   font-family: 'icomoon';
-  src:  url('#{$icomoon-font-path}/icomoon.eot?d144j7');
-  src:  url('#{$icomoon-font-path}/icomoon.eot?d144j7#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/icomoon.ttf?d144j7') format('truetype'),
-    url('#{$icomoon-font-path}/icomoon.woff?d144j7') format('woff'),
-    url('#{$icomoon-font-path}/icomoon.svg?d144j7#icomoon') format('svg');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?uuxqf3');
+  src:  url('#{$icomoon-font-path}/icomoon.eot?uuxqf3#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/icomoon.ttf?uuxqf3') format('truetype'),
+    url('#{$icomoon-font-path}/icomoon.woff?uuxqf3') format('woff'),
+    url('#{$icomoon-font-path}/icomoon.svg?uuxqf3#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -41,11 +38,6 @@ $fa-warning: \ea07;
   @return unquote("\"") + $str + unquote("\"");
 }
 
-.fa-copyright {
-  &:before {
-    content: unicode($fa-copyright);
-  }
-}
 .fa-github {
   &:before {
     content: unicode($fa-github);
@@ -59,11 +51,6 @@ $fa-warning: \ea07;
 .fa-check-circle {
   &:before {
     content: unicode($fa-check-circle);
-  }
-}
-.fa-commenting {
-  &:before {
-    content: unicode($fa-commenting);
   }
 }
 .fa-user {
@@ -81,8 +68,4 @@ $fa-warning: \ea07;
     content: unicode($fa-mobile);
   }
 }
-.fa-warning {
-  &:before {
-    content: unicode($fa-warning);
-  }
-}
+
