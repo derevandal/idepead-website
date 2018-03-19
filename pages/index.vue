@@ -7,12 +7,29 @@
             img(src="/logotipo-blue.svg" width="600" alt="IDEPead" :class="['network',online ? 'online' : 'offline']")
           .box
             .title.has-text-black Fale conosco 🤩
-            b-notification(type='is-success' v-show="sended" has-icon)
-              | Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
-            b-notification(type='is-danger' v-show="error" has-icon)
-              | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
-              a(href="https://fb.com/idepead") Facebook
-              | &nbsp;enquanto isso 😅
+            article.notification.is-success(v-show="error")
+              .media
+                .media-left
+                  span.icon.is-large
+                    i.fa.fa-exclamation-circle.fa-3x
+                .media-content
+                  | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
+                  a(href="https://fb.com/idepead") Facebook
+                  | &nbsp;enquanto isso 😅
+
+            article.notification.is-danger(v-show="sended")
+              .media
+                .media-left
+                  span.icon.is-large
+                    i.fa.fa-check-circle.fa-3x
+                .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
+
+            //- b-notification(type='is-success' v-show="sended" has-icon)
+            //-   | Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
+            //- b-notification(type='is-danger' v-show="error" has-icon)
+            //-   | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
+            //-   a(href="https://fb.com/idepead") Facebook
+            //-   | &nbsp;enquanto isso 😅
             form(name="contact" netlify novalidate='' action="/" @submit.prevent="validateBeforeSubmit")
               .field
                 .control.has-icons-left(:class="{'is-loading': loading }")
