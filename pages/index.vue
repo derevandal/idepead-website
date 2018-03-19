@@ -22,10 +22,10 @@ section.hero.is-idepead.is-bold.is-fullheight
                 span.icon.is-large
                   i.fa.fa-check-circle.fa-3x
               .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
-          form(name="fale-conosco", netlify, action="/send", method='POST', netlify-honeypot='honey', @submit.prevent="validateBeforeSubmit")
+          form(name="fale-conosco", netlify, action="/send", method='POST', netlify-honeypot='subject', @submit.prevent="validateBeforeSubmit")
             .field(style="display:none;")
               .control
-                input.input(type="text" name="honey")
+                input.input(type="text" name="subject")
             .field
               .control.has-icons-left(:class="{'is-loading': loading }")
                 input.input(type="text" :class="{ 'is-danger': errors.has('name') }" name="name" v-model="form.name" placeholder="Qual seu nome?"  v-validate="'required'" required)
@@ -110,7 +110,7 @@ export default {
               .join('&')
           }
           let body = encode({
-            'form-name': 'contact', ...this.form
+            'form-name': 'fale-conosco', ...this.form
           })
           console.log(body)
           function handleErrors(response) {
