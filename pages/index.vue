@@ -108,6 +108,7 @@ export default {
     validateBeforeSubmit() {
       this.$validator.validateAll().then((result) => {
         if (result) {
+          console.log(result)
           this.loading = true
           const encode = (data) => {
             return Object.keys(data)
