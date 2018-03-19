@@ -42,20 +42,19 @@
                 .control.has-icons-left(:class="{'is-loading': loading }")
                   textarea.textarea(:class="{ 'is-danger': errors.has('subject') }" name="textarea" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
                   span.help.is-danger(v-if="errors.has('subject')") Em que podemos lhe ajudar?.
-              b-field(group-multiline style="display:hidden")
-                div(netlify-recaptcha)
-
-              b-field(grouped position="is-right" group-multiline)
+              .field
                 p.control.is-expanded
-                  a.button.is-gray(href="https://github.com/derevandal" target="_blank")
+                  div(netlify-recaptcha style="display:none")
+              .field.is-grouped.is-grouped-right
+                p.control.is-expanded
+                  a.button.is-text(href="https://github.com/derevandal" target="_blank" style="text-decoration: none")
                     span.icon.is-left
-                      i.fa.fa-github
-                    span André Van Dal
-                    span.icon.is-right
                       i.fa.fa-copyright
+                    span André Van Dal
                 p.control
                   button.button.is-primary(:disabled="!online" :class="{'is-loading': loading }")
                     | Enviar mensagem
+
 
 </template>
 
