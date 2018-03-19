@@ -22,7 +22,7 @@ section.hero.is-idepead.is-bold.is-fullheight
                 span.icon.is-large
                   i.fa.fa-check-circle.fa-3x
               .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
-          form(name="fale-conosco", netlify, action="/", method='POST', netlify-honeypot='honey', @submit.prevent="validateBeforeSubmit")
+          form(name="fale-conosco", netlify, action="/send", method='POST', netlify-honeypot='honey', @submit.prevent="validateBeforeSubmit")
             .field(style="display:none;")
               .control
                 input.input(type="text" name="honey")
@@ -115,7 +115,9 @@ export default {
           let body = encode({
             'form-name': 'contact', ...this.form
           })
+          console.log(body)
           function handleErrors(response) {
+            console.log(response)
               if (!response.ok) {
                   throw Error(response.statusText)
               }
