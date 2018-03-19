@@ -7,12 +7,22 @@
             img(src="/logotipo-blue.svg" width="600" alt="IDEPead" :class="['network',online ? 'online' : 'offline']")
           .box
             .title.has-text-black Fale conosco 🤩
-            b-notification(type='is-success' v-if="sended" has-icon)
-              | Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
-            b-notification(type='is-danger' v-if="error" has-icon)
-              | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
-              a(href="https://fb.com/idepead") Facebook
-              | &nbsp;enquanto isso 😅
+            article.notification.is-danger(v-show="error")
+              .media
+                .media-left
+                  span.icon.is-large
+                    i.fa.fa-exclamation-circle.fa-3x
+                .media-content
+                  | Vixi, aconteceu algum problema! 😵 Procure-nos no&nbsp;
+                  a(href="https://fb.com/idepead") Facebook
+                  | &nbsp;enquanto isso 😅
+
+            article.notification.is-success(v-show="sended")
+              .media
+                .media-left
+                  span.icon.is-large
+                    i.fa.fa-check-circle.fa-3x
+                .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você 🤗
             form(name="contact" netlify novalidate='' action="/" @submit.prevent="validateBeforeSubmit")
               .field
                 .control.has-icons-left(:class="{'is-loading': loading }")
@@ -40,8 +50,8 @@
                   span.help.is-danger(v-if="errors.has('subject')") Informe o assunto do contato.
               .field
                 .control.has-icons-left(:class="{'is-loading': loading }")
-                  textarea.textarea(:class="{ 'is-danger': errors.has('subject') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
-                  span.help.is-danger(v-if="errors.has('subject')") Em que podemos lhe ajudar?
+                  textarea.textarea(:class="{ 'is-danger': errors.has('message') }" name="message" v-model="form.message" placeholder="Sobre o que quer conversar?"  v-validate="'required'")
+                  span.help.is-danger(v-if="errors.has('message')") Em que podemos lhe ajudar?
               .field
                 p.control.is-expanded
                   div(netlify-recaptcha style="display:none")
@@ -88,6 +98,10 @@ export default {
       sended: false,
       error: false,
       form: {
+        name: '',
+        phone: '',
+        email: '',
+        subject: '',
         message: ''
       }
     }
@@ -106,8 +120,10 @@ export default {
       this.online = type === 'online'
     },
     validateBeforeSubmit() {
+      console.log(this.$validator)
       this.$validator.validateAll().then((result) => {
         if (result) {
+          console.log(result)
           this.loading = true
           const encode = (data) => {
             return Object.keys(data)
@@ -131,17 +147,23 @@ export default {
           .then(handleErrors)
           .then(() => {
             this.sended = true
+            this.form = {
+              name: '',
+              phone: '',
+              email: '',
+              subject: '',
+              message: ''
+            }
+            this.$validator.pause()
+            this.$nextTick(() => {
+              this.$validator.errors.clear()
+              this.$validator.fields.items.forEach(field => field.reset())
+              this.$validator.fields.items.forEach(field => this.errors.remove(field))
+              this.$validator.resume()
+            })
           })
           .catch(() => {
             this.error = true
-          })
-          this.form = {}
-          this.$validator.pause()
-          this.$nextTick(() => {
-            this.$validator.errors.clear()
-            this.$validator.fields.items.forEach(field => field.reset())
-            this.$validator.fields.items.forEach(field => this.errors.remove(field))
-            this.$validator.resume()
           })
           this.loading = false
           return;
