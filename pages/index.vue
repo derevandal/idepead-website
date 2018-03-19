@@ -87,7 +87,9 @@ export default {
       online: true,
       sended: false,
       error: false,
-      form: { }
+      form: {
+        message: ''
+      }
     }
   },
   mounted () {
