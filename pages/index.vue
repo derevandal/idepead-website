@@ -100,10 +100,9 @@ export default {
   },
   methods: {
     validateBeforeSubmit() {
-      console.log(this.$validator)
+      this.loading = true
       this.$validator.validateAll().then((result) => {
         if (result) {
-          console.log(result)
           this.loading = true
           const encode = (data) => {
             return Object.keys(data)
@@ -113,9 +112,7 @@ export default {
           let body = encode({
             'form-name': 'fale-conosco', ...this.form
           })
-          console.log(body)
           function handleErrors(response) {
-            console.log(response)
               if (!response.ok) {
                   throw Error(response.statusText)
               }
