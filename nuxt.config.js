@@ -17,6 +17,9 @@ module.exports = {
   ** Customize app manifest
   */
   manifest: {
+    name: 'Fale conosco - IDEPead',
+    short_name: 'IDEPead',
+    lang: 'pt-br',
     theme_color: '#6BC7D2'
   },
 
