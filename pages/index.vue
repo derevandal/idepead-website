@@ -7,7 +7,6 @@ section.hero.is-idepead.is-bold.is-fullheight
           img(src="/logotipo-blue.svg" width="600" alt="IDEPead")
         .box
           .title.has-text-black Fale conosco&nbsp;
-            emoji(emoji=":star-struck:" set="google" :size="32")
           article.notification.is-danger(v-if="error")
             .media
               .media-left
@@ -15,18 +14,15 @@ section.hero.is-idepead.is-bold.is-fullheight
                   i.fa.fa-exclamation-circle.fa-3x
               .media-content
                 | Eita, aconteceu algum problema!&nbsp;
-                emoji(emoji=":dizzy_face:" set="google" :size="16")
                 | &nbsp;Procure-nos no&nbsp;
                 a(href="https://fb.com/idepead") Facebook
-                | &nbsp;enquanto isso.&nbsp;
-                emoji(emoji=":sweat_smile:" set="google" :size="16"))
+                | &nbsp;enquanto isso.
           article.notification.is-success(v-if="sended")
             .media
               .media-left
                 span.icon.is-large
                   i.fa.fa-check-circle.fa-3x
               .media-content Mensagem enviada com sucesso! Dentro de 48h úteis responderemos você.
-                emoji(emoji=":hugging_face:" set="google" :size="16")
           form(name="fale-conosco", netlify, action="/send", method='POST', netlify-honeypot='subject', @submit.prevent="validateBeforeSubmit", novalidate="novalidate")
             .field(style="display:none;")
               .control
@@ -74,8 +70,8 @@ section.hero.is-idepead.is-bold.is-fullheight
 html, body {
   overflow: auto;
 }
-.hero-body {
-    padding: 0rem .75rem;
+.hero-body{
+  padding: 0;
 }
 .fa-3x {
   font-size: 3em;
@@ -87,17 +83,13 @@ html, body {
 
 <script>
 import { mask } from 'vue-the-mask'
-import { Emoji } from 'emoji-mart-vue'
 
 export default {
   head: {
     title: 'Fale conosco - IDEPead'
   },
-  components: {
-    emoji: Emoji
-  },
   name: 'indexIDEPead',
-  directives: {mask},
+  directives: { mask },
   data () {
     return {
       loading: false,
@@ -112,7 +104,7 @@ export default {
     }
   },
   methods: {
-    validateBeforeSubmit() {
+    validateBeforeSubmit () {
       this.loading = true
       this.$validator.validateAll().then((result) => {
         if (result) {
@@ -125,18 +117,23 @@ export default {
           let body = encode({
             'form-name': 'fale-conosco', ...this.form
           })
-          function handleErrors(response) {
-              if (!response.ok) {
-                  throw Error(response.statusText)
-              }
-              return response;
-          }
+          // function handleErrors (response) {
+          //     if (!response.ok) {
+          //         throw Error(response.statusText)
+          //     }
+          //     return response;
+          // }
           fetch('/send', {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: body
           })
-          .then(handleErrors)
+          .then((response) => {
+            if (!response.ok) {
+              throw Error(response.statusText)
+            }
+            return response
+          })
           .then(() => {
             this.sended = true
             this.form = {
@@ -157,9 +154,9 @@ export default {
             this.error = true
           })
           this.loading = false
-          return;
+          return
         }
-      });
+      })
     }
   }
 }
