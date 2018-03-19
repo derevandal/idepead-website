@@ -4,7 +4,7 @@ section.hero.is-idepead.is-bold.is-fullheight
     .container.has-text-centered
       .column.is-6.is-offset-3
         h1.title
-          img(src="/logotipo-blue.svg" width="600" alt="IDEPead" :class="['network',online ? 'online' : 'offline']")
+          img(src="/logotipo-blue.svg" width="600" alt="IDEPead")
         .box
           .title.has-text-black Fale conosco 🤩
           article.notification.is-danger(v-if="error")
@@ -58,7 +58,7 @@ section.hero.is-idepead.is-bold.is-fullheight
                     i.fa.fa-github
                   span André Van Dal
               p.control
-                button.button.is-primary(type="submit" form="fale-conosco" :disabled="!online" :class="{'is-loading': loading }")
+                button.button.is-primary(type="submit" form="fale-conosco" :class="{'is-loading': loading }")
                   | Enviar mensagem
 
 
@@ -90,7 +90,6 @@ export default {
   data () {
     return {
       loading: false,
-      online: true,
       sended: false,
       error: false,
       form: {
@@ -101,19 +100,7 @@ export default {
       }
     }
   },
-  mounted () {
-    if (!window.navigator) {
-      this.online = false
-      return
-    }
-    this.online = Boolean(window.navigator.onLine)
-    window.addEventListener('offline', this._toggleNetworkStatus)
-    window.addEventListener('online', this._toggleNetworkStatus)
-  },
   methods: {
-    _toggleNetworkStatus ({ type }) {
-      this.online = type === 'online'
-    },
     validateBeforeSubmit() {
       console.log(this.$validator)
       this.$validator.validateAll().then((result) => {
@@ -164,10 +151,6 @@ export default {
         }
       });
     }
-  },
-  destroyed () {
-    window.removeEventListener('offline', this._toggleNetworkStatus)
-    window.removeEventListener('online', this._toggleNetworkStatus)
   }
 }
 </script>
