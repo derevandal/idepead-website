@@ -67,10 +67,11 @@ section.hero.is-idepead.is-bold.is-fullheight
 * {
   box-sizing: border-box;
 }
-html, body {
+html,
+body {
   overflow: auto;
 }
-.hero-body{
+.hero-body {
   padding: 0;
 }
 .fa-3x {
@@ -82,83 +83,81 @@ html, body {
 </style>
 
 <script>
-import { mask } from 'vue-the-mask'
+import { mask } from "vue-the-mask"
 
 export default {
   head: {
-    title: 'Fale conosco - IDEPead'
+    title: "Fale conosco - IDEPead"
   },
-  name: 'indexIDEPead',
+  name: "IndexIDEPead",
   directives: { mask },
-  data () {
+  data() {
     return {
       loading: false,
       sended: false,
       error: false,
       form: {
-        name: '',
-        phone: '',
-        email: '',
-        message: ''
+        name: "",
+        phone: "",
+        email: "",
+        message: ""
       }
     }
   },
   methods: {
-    validateBeforeSubmit () {
+    validateBeforeSubmit() {
       this.loading = true
-      this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then(result => {
         if (result) {
           this.loading = true
-          const encode = (data) => {
+          const encode = data => {
             return Object.keys(data)
-              .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-              .join('&')
+              .map(
+                key =>
+                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+              )
+              .join("&")
           }
           let body = encode({
-            'form-name': 'fale-conosco', ...this.form
+            "form-name": "fale-conosco",
+            ...this.form
           })
-          // function handleErrors (response) {
-          //     if (!response.ok) {
-          //         throw Error(response.statusText)
-          //     }
-          //     return response;
-          // }
-          fetch('/send', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          fetch("/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: body
           })
-          .then((response) => {
-            if (!response.ok) {
-              throw Error(response.statusText)
-            }
-            return response
-          })
-          .then(() => {
-            this.sended = true
-            this.form = {
-              name: '',
-              phone: '',
-              email: '',
-              message: ''
-            }
-            this.$validator.pause()
-            this.$nextTick(() => {
-              this.$validator.errors.clear()
-              this.$validator.fields.items.forEach(field => field.reset())
-              this.$validator.fields.items.forEach(field => this.errors.remove(field))
-              this.$validator.resume()
+            .then(response => {
+              if (!response.ok) {
+                throw Error(response.statusText)
+              }
+              return response
             })
-          })
-          .catch(() => {
-            this.error = true
-          })
+            .then(() => {
+              this.sended = true
+              this.form = {
+                name: "",
+                phone: "",
+                email: "",
+                message: ""
+              }
+              this.$validator.pause()
+              this.$nextTick(() => {
+                this.$validator.errors.clear()
+                this.$validator.fields.items.forEach(field => field.reset())
+                this.$validator.fields.items.forEach(field =>
+                  this.errors.remove(field)
+                )
+                this.$validator.resume()
+              })
+            })
+            .catch(() => {
+              this.error = true
+            })
           this.loading = false
-          return
         }
       })
     }
   }
 }
 </script>
-
