@@ -58,7 +58,8 @@ module.exports = {
         additionalPaths: ["assets/scss/cosmo.scss", "assets/scss/fonts.scss"],
         whitelist: ['.control.loading']
       }
-    ]
+    ],
+    '@nuxtjs/webpackmonitor',
   ],
 
   plugins: ["~plugins/v-validate"]
